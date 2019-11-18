@@ -71,39 +71,8 @@ $fn->ajax_buscar2($variaveis3, $resposta, $resposta2, $load, $page, $namefunctio
 <script src="../../layouts/style_padrao/assets/js/plugin/jquery-sweetalert2/sweetalert2.js" type="text/javascript"></script>
 <script src="../../layouts/style_padrao/assets/js/plugin/jquery-dataTable/jquery.dataTables.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#table_id').DataTable();
-        carregaTable('tese');
-        $(document).on('click','#novoCurso',function(){
-           const { value: formValues } =  Swal.fire({
-          title: 'Abrir Turma',
-          html:
-            '<input placeholder="Nome da Turma" id="txt_nomeTurma" class="swal3-input"><br>' +
-            '<input placeholder="Periodo Inicio" type="text" id="txt_periodoInicio" class="swal3-input"><br>' +
-            '<input placeholder="Periodo Termino" type="text" id="txt_periodoFim" class="swal3-input"><br>'+            
-            '<select class="swal3-input" id="txt_cursos"><option value="">Selecione</option></select><br>',
-            
-          focusConfirm: false,
-          preConfirm: () => {
-            return [
-              document.getElementById('swal-input1').value,
-              document.getElementById('swal-input2').value,
-              document.getElementById('swal-input3').value,
-              document.getElementById('swal-input4').value
-            ]
-          }
-        })
+<script src="js/controles.js" type="text/javascript"></script>
 
-        if (formValues) {
-          Swal.fire(JSON.stringify(formValues));
-         
-        }
-        carregaSelect_cursos();
-        
-        });
-    });
-</script>
 <?php
 $jquery = ob_get_clean();//JAVA SCRIPT FIM======================================
 
