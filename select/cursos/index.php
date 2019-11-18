@@ -58,16 +58,16 @@ $page = './carregaSelect_areas.php';
 $namefunction = 'carregaSelect_areas';
 $fn->ajax_buscar($variaveis2, $resposta, $load, $page, $namefunction);
 
-
+/*
 $variaveis3 = ['nome_curso', 'sigla_curso', 'duracao', 'area'];
 $resposta = 'x';
 $resposta2 = " carregaTable(); ";
 $load = "carregando";
 $page = '../../insert/curso/salvar.php';
 $namefunction = 'cadastraCurso';
-$tipoEnvio = 'HTML';
+$tipoEnvio = 'JSON';
 $fn->ajax_buscar2($variaveis3, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
-
+*/
 $variaveis6 = ['nome_curso', 'sigla_curso', 'duracao', 'area','id'];
 $resposta = 'x';
 $resposta2 = "carregaTable(); return msg[0].erro;";
@@ -103,6 +103,24 @@ $fn->ajax_buscar2($variaveis4, $resposta, $resposta2, $load, $page, $namefunctio
 <script src="../../layouts/style_padrao/assets/js/plugin/jquery-dataTable/jquery.dataTables.js" type="text/javascript"></script>
 <script src="js/curso.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+<script>function cadastraCurso(nome_curso,sigla_curso,duracao,area) {
+               var page = '../../insert/curso/salvar.php';
+               $.ajax({
+                   type: 'POST',
+                   dataType:'JSON',
+                   cache:false,
+                   url:page,
+                   beforeSend:function(){
+                      $('#carregando').show();
+                   },
+                   data:{nome_curso:nome_curso,sigla_curso:sigla_curso,duracao:duracao,area:area},
+                   success:function(msg){                   
+                                            carregaTable(); 
+                                            alert(msg['mensagem'].status);
+                                            $('#respostas').html();//INSERIR MENSAGEM DE SALVO OU DE ERRO E PERMANCECER POR 3s
+                           }
+               },JSON);
+           }</script>
 <script type="text/javascript">
     $(document).ready(function () {
 

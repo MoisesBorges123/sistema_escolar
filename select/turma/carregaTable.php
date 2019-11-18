@@ -2,17 +2,22 @@
 require_once '../../funcoes/php/myfuctions.php';
 $fn = new myfunctions;
 $link=$fn->conecta();
-$sql = "select * from cursos, turma where cursos.id_curso = turma.curso";
+$sql = "select * from turmas, cursos where cursos.id_curso = turmas.curso order by turmas.nome_turma";
 $result=mysqli_query($link, $sql);
 if(mysqli_affected_rows($link)>0){
     while($row= mysqli_fetch_assoc($result)){
+        if(empty($row['dataConclusao'])){
+            $conclusao = "-";
+        }else{
+            $conclusao=$fn->convercaoData(2,$row['dataAbertura']);
+        }
         echo"<tr>"
         . "<td>".utf8_encode($row['nome_turma'])."</td>"
-        . "<td>".$row['nome_curso']."</td>"
-        . "<td>".$fn->convercaoData(2,$row['duracao'])." periodos</td>"
-        . "<td>".utf8_encode($row['nome'])."</td>"
-        . "<td><i data-id='".$row['id_curso']."' class='la-2x la la-trash text-danger'></i>&nbsp;&nbsp;"
-        . "<i data-id='".$row['id_curso']."' class='la-2x la la-edit text-info'></i></td>"
+        . "<td>".utf8_encode($row['nome_curso'])."</td>"
+        . "<td>".$fn->convercaoData(1,$row['dataAbertura'])."</td>"        
+        . "<td>".$conclusao."</td>"        
+        . "<td class=\"text-center\"><button style='background:none;' class='btn btn-remover' data-nome='".utf8_encode($row['nome_turma'])."' data-cod='".$row['id_turma']."'><i class='la-2x la la-trash text-danger'></i></button>"
+        . "<button class='btn btn-editar' style='background:none;'  data-cod='".$row['id_turma']."'><i  class='la-2x la la-edit text-info'></i></td>"
                 . "</tr>";
     }
 }else{

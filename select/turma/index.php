@@ -22,14 +22,14 @@ ob_start(); //INICIO CONTEÚDO==================================================
         </div>      
     </div>
 </nav>
-<table id="table_id" class="table table-active table-warning table-head-bg-warning table-light">
+<table id="table_id" class="table table-warning table-head-bg-warning table-light">
     <thead>
         <tr>
             <th>Turma</th>
             <th>Curso</th>
             <th>Aberta</th>
             <th>Fechada</th>
-            <th >Ações</th>
+            <th class="text-center" >Ações</th>
         </tr>
     </thead>
     <tbody id="mytable">
@@ -44,6 +44,9 @@ $conteudo = ob_get_clean();//FIM CONTEÚDO======================================
 
 
 ob_start();//JAVASCRIPT INCIO===================================================
+?>
+<script src="js/especial.js" type="text/javascript"></script>
+<?php
 $variaveis1=null;
 $resposta='mytable';
 $load="carregando";
@@ -58,15 +61,18 @@ $page='./carregaSelect_cursos.php';
 $namefunction='carregaSelect_cursos';
 $fn->ajax_buscar($variaveis1, $resposta, $load, $page, $namefunction);
 
-$variaveis3 = ['nome_curso', 'sigla_curso', 'duracao', 'area'];
-$resposta = 'x';
-$resposta2 = " carregaTable(); ";
+$variaveis3 = ['turma', 'inicio', 'curso'];
+$resposta = 'resposta';
+$resposta2 = "\n carregaTable();"
+        . "\n resposta(msg['mensagem'].status,msg['mensagem'].mensagen,msg['mensagem'].icone,3000)";
 $load = "carregando";
-$page = '../../insert/curso/salvar.php';
-$namefunction = 'cadastraCurso';
-$tipoEnvio = 'HTML';
+$page = '../../insert/turma/salvar.php';
+$namefunction = 'cadastraTurma';
+$tipoEnvio = 'JSON';
 $fn->ajax_buscar2($variaveis3, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
+
 ?>
+
 <script src="../../layouts/style_padrao/assets/js/plugin/jquery-sweetalert2/sweetalert2.all.js" type="text/javascript"></script>
 <script src="../../layouts/style_padrao/assets/js/plugin/jquery-sweetalert2/sweetalert2.js" type="text/javascript"></script>
 <script src="../../layouts/style_padrao/assets/js/plugin/jquery-dataTable/jquery.dataTables.js" type="text/javascript"></script>
