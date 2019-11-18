@@ -13,10 +13,10 @@ ob_start(); //INICIO CONTEÚDO==================================================
         <div class="navbar-left navbar-form nav-search mr-md-3 ">
             <div class="row">
                 <div class="col-md-8">
-                    <h4 class="text-white">Meus Cursos</h4>                    
+                    <h4 class="text-white">Alunos</h4>                    
                 </div>
                 <div class="col-md-4">
-                    <button id="novoCurso" class="btn btn-info">Novo Curso</button>                    
+                    <button id="novoCurso" class="btn btn-info">Novo Aluno</button>                    
                 </div>
             </div>
         </div>      
@@ -25,10 +25,9 @@ ob_start(); //INICIO CONTEÚDO==================================================
 <table id="table_id" class=" table  table-warning table-head-bg-warning table-light">
     <thead>
         <tr>
-            <th>Curso</th>
-            <th>Sigla</th>
-            <th>Duração</th>
-            <th>Aréa de Atuação</th>
+            <th>Aluno</th>
+            <th>Matricula</th>
+            <th>Telefone</th>            
             <th >Ações</th>
         </tr>
     </thead>
@@ -44,12 +43,16 @@ $conteudo = ob_get_clean(); //FIM CONTEÚDO=====================================
 
 
 ob_start(); //JAVASCRIPT INCIO===================================================
+
+
 $variaveis1 = null;
 $resposta = 'mytable';
 $load = "carregando";
 $page = './carregaTable.php';
 $namefunction = 'carregaTable';
 $fn->ajax_buscar($variaveis1, $resposta, $load, $page, $namefunction);
+
+
 
 $variaveis2 = null;
 $resposta = 'swal-input4';
@@ -111,36 +114,35 @@ $fn->ajax_buscar2($variaveis4, $resposta, $resposta2, $load, $page, $namefunctio
             ordering: true,
             select: true
         });
+     
         carregaTable();
-        $(document).on('click', '#novoCurso', function () {
-            const {value: formValues} = Swal.fire({
-                title: 'Novo Curso',
-                html:
-                        '<input placeholder="Nome do Curso" id="swal-input1" class="swal3-input"><br>' +
-                        '<input placeholder="Sigla do Curso" id="swal-input2" class="swal3-input"><br>' +
-                        '<input placeholder="Duração (nº períodos)" type="number" id="swal-input3" class="swal3-input"><br>' +
-                        '<select class="swal3-input" id="swal-input4"><option value="">Selecione</option></select><br>',
-
-                focusConfirm: false,
-                preConfirm: () => {
-
-                    var nome = document.getElementById('swal-input1').value;
-                    var sigla = document.getElementById('swal-input2').value;
-                    var duracao = document.getElementById('swal-input3').value;
-                    var area = document.getElementById('swal-input4').value;
-                    cadastraCurso(nome, sigla, duracao, area);
-                   
-
-
+        $(document).on('input','#swal-input3',function(){
+            var telefone = $('#swal-input3').val();
+            if(telefone.length<4){
+                $('#swal-input3').mask("(00) 0000-0000");                
+            }else{                
+                if(telefone.substr(5,1)==9){
+                    $('#swal-input3').mask("(00) 00000-0000");
+                    
+                }else{
+                    $('#swal-input3').mask("(00) 0000-0000");
+                    
                 }
-            })
-
-            if (formValues) {
-                Swal.fire(JSON.stringify(formValues));
-
             }
-            carregaSelect_areas();
-
+        });
+        $(document).on('click', '#novoCurso', function () {
+            const inputOptions = new Promise ((resolve)=>{
+                setTimeout(() =>{
+                    resolve({
+                        '1':'Já é aluno',
+                        '2':'Ainda não é aluno'
+                    })                    
+                },1000)
+            })
+            
+            const { value: aluno } = Swal.fire({
+                title:"teste -linha144"
+            })
         });
         $(document).on('click', '.btn-remover', function () {
          
@@ -188,7 +190,40 @@ $fn->ajax_buscar2($variaveis4, $resposta, $resposta2, $load, $page, $namefunctio
            
 
         });
+        
+        function novoAluno(){
+            const {value: formValues} = Swal.fire({
+                title: 'Nova Matricula',
+                html:
+                        
+                        '<label class="label-modal">Cod Matrículo</label><input name="txt_matricula" placeholder="Numero Matrícula" type="number" id="txt_matricula" class="swal3-input"><br>' +
+                        '<label class="label-modal">Aluno</label><input name="txt_aluno" placeholder="Nome do Aluno" id="txt_aluno" class="swal3-input"><br>' +
+                        '<label class="label-modal">Contato</label><input name="txt_telefone" placeholder="Telefone de Contato" id="txt_telefone" class="swal3-input"><br>'+
+                        '<label class="label-modal">Turma</label><select class="swal3-input" id="txt_turma"><option value="">Selecione</option></select><br>',
+                        
+                        
+                focusConfirm: false,
+                
+                preConfirm: () => {
 
+                    var matricula = document.getElementById('txt_matricula').value;
+                    var aluno = document.getElementById('txt_aluno').value;
+                    var telefone = document.getElementById('txt_telefone').value;
+                    
+                    cadastraAluno(nome, sigla, duracao, area);
+                   
+
+
+                }
+            })
+
+            if (formValues) {
+                Swal.fire(JSON.stringify(formValues));
+
+            }
+            carregaSelect_areas();
+              
+        }
 
 
     });

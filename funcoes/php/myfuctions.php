@@ -353,6 +353,116 @@ public function remover_caracter($string) {
         echo"   </select><div class='validation' id='valida_" . $id . "'></div>
         </div></div>";
     }
+    
+    public function mensagens_erro($r){
+        $erro = explode('.', $r);
+        $r = $erro[0];
+        $t = count($erro);
+        if ($t > 1) {
+            $position = $erro[1];
+            
+        } else {
+            $position = 0;
+        }
+        if(!empty($erro[2])){
+            $sql=$erro[2];
+        }else{
+            $sql='';
+        }
+        if(!empty($erro[3])){
+            $sqlDetalhes='<br><b>Detalhes: #</b>'. str_replace("'", " ", $erro[3]) ;
+        }else{
+            $sqlDetalhes='';
+        }
+
+        switch ($r) {
+
+            case 0://Não Existe
+                $mensagem = "&nbsp<b>OPS!</b> Impossivel prosseguir!<br><small>Detalhes:A variavel $position não existe.</small>";
+                $state = "danger";
+                $icon="fa fa-band";
+                break;
+            case 1://Campos não preenchidos
+                $mensagem = "&nbsp<b>OPS!</b> Por favor preencha todos os campos!<br><small>Detalhes:O campo $position não possui valor.</small>";
+                $state = "warning";
+                $icon="fa fa-band";
+                break;
+            case 2://Campos com dados incopativeis ao tipo de variavel
+                $mensagem = "&nbsp<b>OPS!</b> Por verifique se todos os campos foram preenchidos corretamente!<br><small>Detalhes:O campo $position não equivale ao tipo esperado.</small>";
+                $state = "warning";
+                $icon="fa fa-band";
+                break;
+            case 3://Inseriu numero '0'
+                $mensagem = "&nbsp<b>OPS!</b> Por favor insiera um valor maior que <b>ZERO</b> no campo $position!<br><small>Detalhes:O campo $position não aceita valores menor que ZERO.</small>";
+                $state = "warning";
+                $icon="fa fa-band";
+                break;
+            case 4://Erro no mysql
+                $mensagem = "&nbsp<b>Erro Crítico!</b> Impossivel conectar com o banco de dados!<br><small>Detalhes:Ocorreu um erro ao inserir os dados por favor verifique o SQL.<br>Código:$sql $sqlDetalhes</small>";
+                $state = "danger";
+                $icon="fa fa-exclamation-triangle";
+                $time='10000';
+                break;
+            case 5://registro salvo
+                $mensagem = "&nbsp<b>OK!</b> Registro salvo com sucesso!";
+                $state = "success";
+                $icon="fa fa-check";
+                break;
+            case 13:
+                $mensagem = "&nbsp<b>Erro Crítico!</b> Erro ao salvar o arquivo.";
+                $state = "danger";
+                $icon="fa fa-band";
+                
+                break;
+            case 14:
+                $mensagem = "&nbsp<b>OPS!</b> Você poderá enviar apenas arquivos '*.jpg;*.jpeg;*.png'<br/>";
+                $state = "warning";
+                $icon="fa fa-band";
+                break;
+            case 15:
+                $mensagem = "&nbsp<b>OPS!</b> Você não enviou nenhum arquivo.<br>";
+                $state = "warning";
+                $icon="fa fa-band";
+                break;
+            case 16:
+                $state = "success";
+                $mensagem = "&nbsp<b>OK!</b> Postagem realizada com sucesso!";
+                $icon="fa fa-check";
+
+                break;
+            case 18://registro excluido
+                $mensagem = "&nbsp<b>OK!</b> Registro excluido com sucesso!";
+                $state = "success";
+                $icon = 'fa fa-trash';
+                break;
+            case 19://registro atualizado
+                $mensagem = "&nbsp<b>OK!</b> Registro atualizado com sucesso!";
+                $state = "primary";
+                $icon = 'fas fa-sync-alt';
+                break;
+            case 20://registro não atualizado
+                $mensagem = "&nbsp<b>OPS!</b>  Nenhum dado foi alterado.";
+                $state = "info";
+                $icon = 'fas fa-exclamation-circle';
+                break;
+            case 22://Venda Cancelada com sucesso
+                $mensagem = "<b>OK!</b> Venda cancelada com sucesso!";
+                $state = "success";
+                $icon = 'fa fa-ban';
+                break;
+            default:
+                $mensagem = "Erro inesperado do sistema, verifique a função";
+                $state = "danger";
+                $icon = 'fa fa-close';
+        }
+        
+        $resposta = [ 
+          'mensagen'  =>$mensagem,
+            'status'=>$state,
+            'icone'=>$icon
+        ];
+        return $resposta;
+    }
 
     public function notificacao1($r, $men = 0) {
 
@@ -1524,21 +1634,23 @@ public function remover_caracter($string) {
         if (empty($load)) {
             $load = "carregando";
         }
-        $i = 0;
-        $t = count($variaveis1);
+        
         $variaveis2 = "";
-       
-        foreach ($variaveis1 as $y) {
-            if ($i == 0) {
-                $variaveis2 = $y . ":" . $y;
-                $variaveis3 = $y;
-            } else {
-                $variaveis2 = $variaveis2 . "," . $y . ":" . $y;
-                $variaveis3 .= "," . $y;
+       if(!empty($variaveis1) && $variaveis1!=null ){
+           $i=0;
+            foreach ($variaveis1 as $y) {
+                if ($i == 0) {
+                    $variaveis2 = $y . ":" . $y;
+                    $variaveis3 = $y;
+                } else {
+                    $variaveis2 = $variaveis2 . "," . $y . ":" . $y;
+                    $variaveis3 .= "," . $y;
+                }
+                $i++;
             }
-            $i++;
-        }
-
+       }else{
+           $variaveis3='';
+       }
         echo"<script>function $namefunction($variaveis3) {
                var page = '" . $page . "';
                $.ajax({
@@ -1548,7 +1660,7 @@ public function remover_caracter($string) {
                    beforeSend:function(){
                       $('#$load').show();
                    },";
-                   if(!empty($variaveis1)){echo"data:{" . $variaveis2 . "},";}
+                   if(!empty($variaveis1) && count($variaveis1)>0){echo"data:{" . $variaveis2 . "},\n";}
                    
                    echo"success:function(msg){
                   
@@ -1560,7 +1672,7 @@ public function remover_caracter($string) {
            }</script>";
     }
 
-    public function ajax_buscar2($variaveis1, $resposta, $resposta2,$load, $page, $namefunction) {
+    public function ajax_buscar2($variaveis1, $resposta, $resposta2,$load, $page, $namefunction,$tipoEnvio) {
         if (empty($resposta2)) {
             $resposta2 = "";
         }
@@ -1582,17 +1694,16 @@ public function remover_caracter($string) {
                var page = '" . $page . "';
                $.ajax({
                    type: 'POST',
-                   dataType:'html',
+                   dataType:'$tipoEnvio',
+                   cache:false,
                    url:page,
                    beforeSend:function(){
                       $('#$load').show();
                    },
                    data:{" . $variaveis2 . "},
-                   success:function(msg){ 
-                  
-                                            $('#$resposta').delay(2000);
-                                            $('#$load').hide();
-                   $('#$resposta').html(msg);$resposta2}
+                   success:function(msg){                   
+                                           $resposta2
+                           }
                });
            }</script>";
     }

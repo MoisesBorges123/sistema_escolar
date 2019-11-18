@@ -148,6 +148,7 @@
 <script src="../../layouts/style_padrao/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 <script src="../../layouts/style_padrao/assets/js/ready.min.js"></script>
 <script src="../../layouts/style_padrao/assets/js/mascaras.js"></script>
+<script src="../../layouts/style_padrao/assets/plugin/jquery-validate/jquery.validate.js" type="text/javascript"></script>
 <script>
 	$( function() {
 //		$( "#slider" ).slider({

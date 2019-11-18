@@ -87,26 +87,12 @@
         </div>
         <ul class="nav">
             <li <?php echo$c1;?> >
-                <a href="../../insert/aluno/">
+                <a href="../../select/alunos/">
                     <i class="la la-user-plus" style="color:#ff0000"></i>
-                    <p>Novo Aluno</p>                    
+                    <p>Alunos</p>                    
                 </a>
             </li>
-           
-            <li <?php echo$c2;?>>
-                <a href="../../paginas/site/site.php">
-                    <i class="la la-users"></i>
-                    <p>Alunos</p>
-                   
-                </a>
-            </li>
-            <li <?php echo$c3;?>>
-                <a href="../../paginas/cursos/curso.php">
-                    <i class="la la-flask"></i>
-                    <p>Abri Turma</p>
-                    <span class="badge badge-count"></span>
-                </a>
-            </li>
+            
             <li <?php echo$c3;?>>
                 <a href="../../select/cursos/">
                     <i class="la la-users"></i>
@@ -115,7 +101,7 @@
                 </a>
             </li>
             <li <?php echo$c4;?>>
-                <a href="#">
+                <a href="../../select/turma/">
                     <i class="la la-cubes"></i>
                     <p>Turmas</p>
                     <span class="badge badge-count"></span>

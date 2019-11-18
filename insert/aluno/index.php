@@ -16,6 +16,7 @@ ob_start(); //INICIO CONTEÚDO
             </div>
             <div class="card-body">
                 <div class="row">
+                    <form action="#novoAluno" id="form_novoAluno" method="post">
                     <?php 
                         $label="Matricula";
                         $type = "text";
@@ -31,10 +32,10 @@ ob_start(); //INICIO CONTEÚDO
                         $tam=12;
                         $fn->insereINPUT($label, $type, $id, $name, $placeholder, $comentario='', $tam, $id_label='');
                         
-                        $label="Telefone";
+                        $label="Contato";
                         $type = "text";
                         $id="txt_telefone";$name="txt_telefone";
-                        $placeholder="(00) 0000-0000";
+                        $placeholder="Telefone de Contato";
                         $tam=7;
                         $fn->insereINPUT($label, $type, $id, $name, $placeholder, $comentario='', $tam, $id_label='');
                         
@@ -57,7 +58,7 @@ ob_start(); //INICIO CONTEÚDO
                         $fn->insereSELECT_1($sql, $value, $option, $label, $name, $id, $tam);
                     
                     ?>
-                    
+                    </form>
                 </div>
             </div>
         </div>
@@ -66,6 +67,52 @@ ob_start(); //INICIO CONTEÚDO
 <?php
 $conteudo = ob_get_clean();//FIM CONTEÚDO
 
+
+ob_start();
+?>
+<script>
+    $(document).ready(function(){
+        $(document).on('input','#txt_telefone',function(){
+            var telefone = $('#txt_telefone').val();
+            if(telefone.length<4){
+                $('#txt_telefone').mask("(00) 0000-0000");                
+            }else{                
+                if(telefone.substr(5,1)==9){
+                    $('#txt_telefone').mask("(00) 00000-0000");
+                    
+                }else{
+                    $('#txt_telefone').mask("(00) 0000-0000");
+                    
+                }
+            }
+        });
+        
+        $('#form_novoAluno').validate({
+        rules:{
+            
+            txt_matricula:{
+              required:true
+              
+            },
+            txt_telefone:{
+                required:true,          
+            },
+            txt_aluno:{
+                required:true,          
+            },
+            txt_curso:{
+                required:true,          
+            },
+            
+           
+        }
+    });
+        
+    });
+    
+</script>
+<?php
+$jquery= ob_get_clean();
 
 require_once '../../layouts/estilo_home/pg01.php';
 ?>
