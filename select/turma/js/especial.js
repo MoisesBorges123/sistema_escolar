@@ -36,3 +36,13 @@ function resposta(status,mensagem,icone,tempo){
                         
                 });
 }
+
+function resposta2(titulo,mensagem,status){
+                 Swal.fire(
+                    titulo,
+                    mensagem,
+                    status
+                );
+}
+
+

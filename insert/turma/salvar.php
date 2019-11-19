@@ -2,11 +2,12 @@
 require_once '../../funcoes/php/myfuctions.php';
 $fn = new myfunctions();
 
-$campos_bd=['curso','nome_turma','dataAbertura'];
+$campos_bd=['curso','nome_turma','dataAbertura','ativo'];
 $valores=[];
 $valores[]=['value'=>$_POST['curso'],'type'=>1];
 $valores[]=['value'=>$_POST['turma'],'type'=>8];
 $valores[]=['value'=>$_POST['inicio'],'type'=>8];
+$valores[]=['value'=>1,'type'=>1];
 $tabela='turmas';
 $r=$fn->cadastrar1($campos_bd, $valores, $tabela);
 $x = explode('.', $r);

@@ -27,7 +27,7 @@ $(document).ready(function(){
         carregaSelect_cursos();
         
         });
-                $(document).on('click', '.btn-remover', function () {
+        $(document).on('click', '.btn-remover', function () {
          
             var turma = $(this).data('nome');
             
@@ -46,26 +46,84 @@ $(document).ready(function(){
                     var id = $(this).data('cod');
             
                     
-                    erro = deletaCurso(id);
-                    alert(erro);
-                    if(erro==0){
-                        Swal.fire(
-                            'Registro Excluido!',
-                            'O curso de ' + curso + ' foi excluido com sucesso.',
-                            'success'
-                            );
-                    carregaTable();
-                    }else{
-                        Swal.fire(
-                            'OPS! Ocorreu um erro.',
-                            'Não foi possível excluir o curso de ' + curso + '.',
-                            'error'
-                            );
-                    carregaTable();
-                    }
+                    deletaTurma(id,turma);
+                       
+                    
                     
                 }
             });
         });
+        $(document).on('click', '.btn-editar', function () {
+            var id = $(this).data('cod');
+            carregaTurma(id);
+           
+
+        });
+        
+        
+    function dadosCarregados(nome,inicio,fim,curso,id){
+        var update = null;
+             const { value: formValues } =  Swal.fire({
+          title: 'Curso de '+nome,
+          html:
+            '<label class="label-modal">Curso</label><input value="'+nome+'" placeholder="Nome do Curso" id="swal-input1" class="swal3-input"><br>' +
+            '<label class="label-modal">Data Abertura</label><input value='+inicio+' placeholder="" id="swal-input2" class="swal3-input"><br>' +            
+            '<label class="label-modal">Curso</label><select class="swal3-input" id="swal-input4"><option value="">Selecione</option></select><br>',
+            
+         
+          focusConfirm: false,
+         
+          preConfirm: () => {
+            
+              var nome2=document.getElementById('swal-input1').value;
+              var dataAbertura2 = document.getElementById('swal-input2').value;
+              var curso2=document.getElementById('swal-input4').value;
+              
+              
+          
+                  editaTurma(nome2,inicio,curso,id);
+                  console.log(update);
+                  if(update==0 && update!=null){
+                         $('#respostas').html("<div class='alert alert-success'>Registro editado com sucesso</d>");
+                      setTimeout(function(){
+                         $('#respostas').html("");
+                      },3000);
+                     
+                  }else{
+                      
+                  }                
+                 
+          }         
+          
+        })
+          
+          if(update!=null && update==0){
+                alert('deu certo');
+           }else if(update==1){ 
+                alert('deu errado');
+               
+           }
+
+        if (formValues) {
+          //Swal.fire(JSON.stringify(formValues));          
+        }
+        
+         var page = './carregaSelect_areas.php';
+               $.ajax({
+                   type: 'POST',
+                   dataType:'html',
+                   url:page,
+                   beforeSend:function(){
+                     Swal.showLoading(); 
+                   },success:function(msg){                
+                                 
+                    $('#swal-input4').html(msg);
+                    $('#swal-input4').val(area);
+                    Swal.hideLoading() ;
+                       }
+        
+    });
+        
+        }
     });
     

@@ -2,7 +2,7 @@
 require_once '../../funcoes/php/myfuctions.php';
 $fn = new myfunctions;
 $link=$fn->conecta();
-$sql = "select * from turmas, cursos where cursos.id_curso = turmas.curso order by turmas.nome_turma";
+$sql = "select * from turmas, cursos where cursos.id_curso = turmas.curso and turmas.ativo='1' order by turmas.nome_turma";
 $result=mysqli_query($link, $sql);
 if(mysqli_affected_rows($link)>0){
     while($row= mysqli_fetch_assoc($result)){

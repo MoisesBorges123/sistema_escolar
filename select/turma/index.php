@@ -22,7 +22,7 @@ ob_start(); //INICIO CONTEÚDO==================================================
         </div>      
     </div>
 </nav>
-<table id="table_id" class="table table-warning table-head-bg-warning table-light">
+<table id="table_id" data-erro="" class="table table-warning table-head-bg-warning table-light">
     <thead>
         <tr>
             <th>Turma</th>
@@ -71,12 +71,82 @@ $namefunction = 'cadastraTurma';
 $tipoEnvio = 'JSON';
 $fn->ajax_buscar2($variaveis3, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
 
+$variaveis6 = ['turma', 'dataAbertura', 'curso','id'];
+$resposta = 'x';
+$resposta2 = "carregaTable(); return msg[0].erro;";
+$load = "carregando";
+$page = '../../update/curso/atualizar.php';
+$namefunction = 'editaCurso';
+$tipoEnvio = 'JSON';
+$fn->ajax_buscar2($variaveis6, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
+
+$variaveis4 = ['id'];
+$resposta = 'x';
+$load = "carregando";
+$tipoEnvio = 'JSON';
+$page = '../../update/turma/carregaDados.php';
+$namefunction = 'carregaTurma';
+$resposta2 = "dadosCarregados(msg.nome,msg.inicio,msg.fim,msg.curso,id);";
+$fn->ajax_buscar2($variaveis4, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
+
+/*
+$variaveis4=['id'];
+$resposta='resposta';
+$load="carregando";
+$page='../../delete/turma/excluir.php';
+$namefunction='deletaTurma';
+$tipoEnvio = 'JSON';
+$resposta2=" \n carregaTable(); "        
+        . "\n return msg.erro;";
+$fn->ajax_buscar2($variaveis4, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
+*/
+
 ?>
 
 <script src="../../layouts/style_padrao/assets/js/plugin/jquery-sweetalert2/sweetalert2.all.js" type="text/javascript"></script>
 <script src="../../layouts/style_padrao/assets/js/plugin/jquery-sweetalert2/sweetalert2.js" type="text/javascript"></script>
 <script src="../../layouts/style_padrao/assets/js/plugin/jquery-dataTable/jquery.dataTables.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+</script>
+<script>    
+    function deletaTurma(id,turma) {
+               var page = '../../delete/turma/excluir.php';
+                
+               $.ajax({
+                   type: 'POST',
+                   dataType:'JSON',
+                   cache:false,
+                   url:page,
+                   beforeSend:function(){
+                      
+                   },
+                   data:{id:id},
+                   success:function(msg){                   
+                     carregaTable();
+                  
+                     var erro = msg.erro;
+                     if(erro==0){
+                        Swal.fire(
+                            'Registro Excluido!',
+                            'O curso de <b>' + turma + '</b> foi excluido com sucesso.',
+                            'success'
+                            );
+                    
+                    }else{
+                        Swal.fire(
+                            'OPS! Ocorreu um erro.',
+                            'Não foi possível excluir o curso de <b>' + turma + '</b>.',
+                            'error'
+                            );
+                    
+                    }
+                     
+                                            
+                   }
+               },'json');
+               
+           }
+</script>
 <script src="js/controles.js" type="text/javascript"></script>
 
 <?php
