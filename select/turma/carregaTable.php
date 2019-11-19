@@ -9,7 +9,7 @@ if(mysqli_affected_rows($link)>0){
         if(empty($row['dataConclusao'])){
             $conclusao = "-";
         }else{
-            $conclusao=$fn->convercaoData(2,$row['dataAbertura']);
+            $conclusao=$fn->convercaoData(1,$row['dataConclusao']);
         }
         echo"<tr>"
         . "<td>".utf8_encode($row['nome_turma'])."</td>"

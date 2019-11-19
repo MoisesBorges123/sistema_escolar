@@ -71,12 +71,13 @@ $namefunction = 'cadastraTurma';
 $tipoEnvio = 'JSON';
 $fn->ajax_buscar2($variaveis3, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
 
-$variaveis6 = ['turma', 'dataAbertura', 'curso','id'];
+$variaveis6 = ['turma', 'inicio','fim', 'curso','id'];
 $resposta = 'x';
-$resposta2 = "carregaTable(); return msg[0].erro;";
+$resposta2 = "\n carregaTable();"
+        . "\n resposta(msg['mensagem'].status,msg['mensagem'].mensagen,msg['mensagem'].icone,3000)";
 $load = "carregando";
-$page = '../../update/curso/atualizar.php';
-$namefunction = 'editaCurso';
+$page = '../../update/turma/atualizar.php';
+$namefunction = 'editaTurma';
 $tipoEnvio = 'JSON';
 $fn->ajax_buscar2($variaveis6, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
 
