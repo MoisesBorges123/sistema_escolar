@@ -5,7 +5,7 @@
 require_once '../../funcoes/php/myfuctions.php';
 $fn = new myfunctions;
 $link=$fn->conecta();
-$sql = "select * from turmas, cursos where cursos.id_curso = turmas.curso and id_curso='".$_POST['id']."'";
+$sql = "select * from turmas, cursos where cursos.id_curso = turmas.curso and turmas.id_turma='".$_POST['id']."'";
 $resultado= mysqli_query($link, $sql);
 if(mysqli_affected_rows($link)>0){
   
