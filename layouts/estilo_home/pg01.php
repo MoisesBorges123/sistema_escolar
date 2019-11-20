@@ -149,6 +149,7 @@
 <script src="../../layouts/style_padrao/assets/js/ready.min.js"></script>
 <script src="../../layouts/style_padrao/assets/js/mascaras.js"></script>
 <script src="../../layouts/style_padrao/assets/plugin/jquery-validate/jquery.validate.js" type="text/javascript"></script>
+
 <script>
 	$( function() {
 //		$( "#slider" ).slider({
@@ -210,6 +211,27 @@ function retorno2 (titulo,mensagem,status){
                 );
 }
 
+
+function phoneValidate(telefone){
+                caracteres = telefone.val().length;
+                if(caracteres>=5){
+                    var x = telefone.val();
+                   var y=x.substr(5,1);
+                   console.log(y);
+                    if(y==9){
+                        //Montar Função para o telefone funcionar tanto com celular como fixo
+                        telefone.mask('(00) 00000-0000');
+                    }else{
+                        telefone.mask('(00) 0000-0000');
+                    }
+                }else if(caracteres==1){
+                    telefone.mask('(00) 0000-0000');
+                }
+                
+            }
+function gerarMatricula(){
+            return ((new Date().getTime()/1000)* Math.random());
+}
 
 </script>
 <!-- <script>

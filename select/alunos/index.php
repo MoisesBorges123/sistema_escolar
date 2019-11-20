@@ -13,10 +13,10 @@ ob_start(); //INICIO CONTEÚDO==================================================
         <div class="navbar-left navbar-form nav-search mr-md-3 ">
             <div class="row">
                 <div class="col-md-8">
-                    <h4 class="text-white">Turmas</h4>                    
+                    <h4 class="text-white">Alunos</h4>                    
                 </div>
                 <div class="col-md-4">
-                    <button id="novoCurso" class="btn btn-info">Abrir Turma</button>                    
+                    <button id="novoAluno" class="btn btn-info">Novo Aluno</button>                    
                 </div>
             </div>
         </div>      
@@ -25,10 +25,9 @@ ob_start(); //INICIO CONTEÚDO==================================================
 <table id="table_id" data-erro="" class="table table-warning table-head-bg-warning table-light">
     <thead>
         <tr>
-            <th>Turma</th>
-            <th>Curso</th>
-            <th>Aberta</th>
-            <th>Fechada</th>
+            <th>Matricula</th>
+            <th>Aluno</th>
+            <th>Telefone</th>            
             <th class="text-center" >Ações</th>
         </tr>
     </thead>
@@ -61,13 +60,13 @@ $page='./carregaSelect_cursos.php';
 $namefunction='carregaSelect_cursos';
 $fn->ajax_buscar($variaveis1, $resposta, $load, $page, $namefunction);
 
-$variaveis3 = ['turma', 'inicio', 'curso'];
+$variaveis3 = ['aluno', 'matricula', 'telefone'];
 $resposta = 'resposta';
 $resposta2 = "\n carregaTable();"
-        . "\n resposta(msg['mensagem'].status,msg['mensagem'].mensagen,msg['mensagem'].icone,3000)";
+        . "\n retorno1(msg['mensagem'].status,msg['mensagem'].mensagen,msg['mensagem'].icone,3000)";
 $load = "carregando";
-$page = '../../insert/turma/salvar.php';
-$namefunction = 'cadastraTurma';
+$page = '../../insert/aluno/salvar.php';
+$namefunction = 'cadastraAluno';
 $tipoEnvio = 'JSON';
 $fn->ajax_buscar2($variaveis3, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
 
@@ -90,17 +89,16 @@ $namefunction = 'carregaTurma';
 $resposta2 = "dadosCarregados(msg.nome,msg.inicio,msg.fim,msg.curso,id);";
 $fn->ajax_buscar2($variaveis4, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
 
-/*
-$variaveis4=['id'];
+$variaveis4=['id','aluno'];
 $resposta='resposta';
 $load="carregando";
-$page='../../delete/turma/excluir.php';
-$namefunction='deletaTurma';
+$page='../../delete/aluno/excluir.php';
+$namefunction='deletaAluno';
 $tipoEnvio = 'JSON';
 $resposta2=" \n carregaTable(); "        
-        . "\n return msg.erro;";
+        . "\n retorno2(msg.titulo,msg.mensagem,msg.status); ";
 $fn->ajax_buscar2($variaveis4, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
-*/
+
 
 ?>
 
@@ -108,46 +106,6 @@ $fn->ajax_buscar2($variaveis4, $resposta, $resposta2, $load, $page, $namefunctio
 <script src="../../layouts/style_padrao/assets/js/plugin/jquery-sweetalert2/sweetalert2.js" type="text/javascript"></script>
 <script src="../../layouts/style_padrao/assets/js/plugin/jquery-dataTable/jquery.dataTables.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-</script>
-<script>    
-    function deletaTurma(id,turma) {
-               var page = '../../delete/turma/excluir.php';
-                
-               $.ajax({
-                   type: 'POST',
-                   dataType:'JSON',
-                   cache:false,
-                   url:page,
-                   beforeSend:function(){
-                      
-                   },
-                   data:{id:id},
-                   success:function(msg){                   
-                     carregaTable();
-                  
-                     var erro = msg.erro;
-                     if(erro==0){
-                        Swal.fire(
-                            'Registro Excluido!',
-                            'O curso de <b>' + turma + '</b> foi excluido com sucesso.',
-                            'success'
-                            );
-                    
-                    }else{
-                        Swal.fire(
-                            'OPS! Ocorreu um erro.',
-                            'Não foi possível excluir o curso de <b>' + turma + '</b>.',
-                            'error'
-                            );
-                    
-                    }
-                     
-                                            
-                   }
-               },'json');
-               
-           }
-</script>
 <script src="js/controles.js" type="text/javascript"></script>
 
 <?php

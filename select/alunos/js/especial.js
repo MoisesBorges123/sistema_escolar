@@ -1,59 +1,13 @@
-function resposta(status,mensagem,icone,tempo){
-     var placementFrom = 'top';
-		var placementAlign = 'right';
-		var state = status;        
-		var content = {};
 
-		content.message = mensagem;
-		content.title = '';
-		
-		content.icon = icone;
-		
-		
-		content.url = '';
-		content.target = '_blank';
-               
-		$.notify(content,{
-			type: state,
-			placement: {
-				from: placementFrom,
-				align: placementAlign
-			},
-                        offset: 20,
-                        spacing: 10,
-                        allow_dismiss: true,
-                        z_index: 1031,
-                        delay: 7000,
-			time: tempo,
-                        showProgressbar: false,
-                        
-                        animate: {
-                                enter: 'animated fadeInDown',
-                                exit: 'animated fadeOutUp'
-                        },
-                        
-                        
-                        
-                });
-}
-
-function resposta2(titulo,mensagem,status){
-                 Swal.fire(
-                    titulo,
-                    mensagem,
-                    status
-                );
-}
-
-function dadosCarregados(nome,inicio,fim,curso,id){
+function dadosCarregados(nome,matricula,telefone,id){
         var update = null;
              const { value: formValues } =  Swal.fire({
-          title: 'Turma de '+nome,
+          title: 'Aluno '+nome,
           html:
             '<label class="label-modal">Noma da Turma</label><input value="'+nome+'" placeholder="Nome do Curso" id="swal-input1" class="swal3-input"><br>' +
-            '<label class="label-modal">Data Abertura</label><input type="date" value='+inicio+' placeholder="" id="swal-input2" class="swal3-input"><br>' +            
-            '<label class="label-modal">Data Conclusão</label><input type="date" value='+fim+' placeholder="" id="swal-input5" class="swal3-input"><br>' +            
-            '<label class="label-modal">Curso</label><select class="swal3-input" id="swal-input4"><option value="">Selecione</option></select><br>',
+            '<label class="label-modal">Data Abertura</label><input type="date" value='+matricula+' placeholder="" id="swal-input2" class="swal3-input"><br>' +            
+            '<label class="label-modal">Data Conclusão</label><input type="date" value='+telefone+' placeholder="" id="swal-input5" class="swal3-input"><br>' +            
+            
             
          
           focusConfirm: false,
