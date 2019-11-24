@@ -60,7 +60,7 @@ $(document).ready(function(){
         });
         $(document).on('click', '.btn-editar', function () {
             var id = $(this).data('cod');
-            carregaTurma(id);
+            carregaAluno(id);
            
 
         });

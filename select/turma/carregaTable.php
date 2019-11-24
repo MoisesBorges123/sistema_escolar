@@ -16,9 +16,11 @@ if(mysqli_affected_rows($link)>0){
         . "<td>".utf8_encode($row['nome_curso'])."</td>"
         . "<td>".$fn->convercaoData(1,$row['dataAbertura'])."</td>"        
         . "<td>".$conclusao."</td>"        
-        . "<td class=\"text-center\"><button style='background:none;' class='btn btn-remover' data-nome='".utf8_encode($row['nome_turma'])."' data-cod='".$row['id_turma']."'><i class='la-2x la la-trash text-danger'></i></button>"
-        . "<button class='btn btn-editar' style='background:none;'  data-cod='".$row['id_turma']."'><i  class='la-2x la la-edit text-info'></i></td>"
-                . "</tr>";
+        . "<td class=\"text-center\">"
+            . "<button style='background:none;' class='btn btn-add-aluno' data-nome='".utf8_encode($row['nome_turma'])."' data-cod='".$row['id_turma']."'><i class='la-2x la la-plus text-primary'></i></button>"
+            . "<button style='background:none;' class='btn btn-remover' data-nome='".utf8_encode($row['nome_turma'])."' data-cod='".$row['id_turma']."'><i class='la-2x la la-trash text-danger'></i></button>"
+            . "<button class='btn btn-editar' style='background:none;'  data-cod='".$row['id_turma']."'><i  class='la-2x la la-edit text-info'></i></td>"
+        . "</tr>";
     }
 }else{
     echo"<tr><td colspan='5'>Não existe nenhuma turma aberta.</td></tr>";

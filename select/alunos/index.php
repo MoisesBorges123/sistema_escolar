@@ -70,13 +70,13 @@ $namefunction = 'cadastraAluno';
 $tipoEnvio = 'JSON';
 $fn->ajax_buscar2($variaveis3, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
 
-$variaveis6 = ['turma', 'inicio','fim', 'curso','id'];
+$variaveis6 = ['nome', 'matricula','telefone','id'];
 $resposta = 'x';
 $resposta2 = "\n carregaTable();"
-        . "\n resposta(msg['mensagem'].status,msg['mensagem'].mensagen,msg['mensagem'].icone,3000)";
+        . "\n retorno1(msg['mensagem'].status,msg['mensagem'].mensagen,msg['mensagem'].icone,3000)";
 $load = "carregando";
-$page = '../../update/turma/atualizar.php';
-$namefunction = 'editaTurma';
+$page = '../../update/aluno/atualizar.php';
+$namefunction = 'editaAluno';
 $tipoEnvio = 'JSON';
 $fn->ajax_buscar2($variaveis6, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
 
@@ -84,9 +84,13 @@ $variaveis4 = ['id'];
 $resposta = 'x';
 $load = "carregando";
 $tipoEnvio = 'JSON';
-$page = '../../update/turma/carregaDados.php';
-$namefunction = 'carregaTurma';
-$resposta2 = "dadosCarregados(msg.nome,msg.inicio,msg.fim,msg.curso,id);";
+$page = '../../update/aluno/carregaDados.php';
+$namefunction = 'carregaAluno';
+$resposta2 = "if(msg.erro==0){"
+        . " dadosCarregados(msg.nome,msg.matricula,msg.telefone,id);"
+        . "}else{"
+        . "retorno2('OPS!','Não foi possivel carregar os dados desse registro','error');"
+        . "}";
 $fn->ajax_buscar2($variaveis4, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
 
 $variaveis4=['id','aluno'];

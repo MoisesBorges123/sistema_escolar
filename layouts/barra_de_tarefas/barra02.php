@@ -114,13 +114,7 @@
                     <span class="badge badge-success"></span>
                 </a>
             </li>
-            <li <?php echo$c6;?>>
-                <a href="../../visualizacao/solicitacao_certidao/tbl_solicitacao.php">
-                    <i class="la la-file-text"></i>
-                    <p>Pedidos de Certidão</p>
-                    <span class="badge badge-count"></span>
-                </a>
-            </li>
+           
             
            
            
