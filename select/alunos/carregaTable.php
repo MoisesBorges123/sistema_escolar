@@ -18,7 +18,8 @@ if(mysqli_affected_rows($link)>0){
         . "<td>".utf8_encode($row['nome_aluno'])."</td>"
         . "<td>".$row['telefone']."</td>"                
         . "<td class=\"text-center\"><button style='background:none;' class='btn btn-remover' data-nome='".utf8_encode($row['nome_aluno'])."' data-cod='".$row['id_aluno']."'><i class='la-2x la la-trash text-danger'></i></button>"
-        . "<button class='btn btn-editar' style='background:none;'  data-cod='".$row['id_aluno']."'><i  class='la-2x la la-edit text-info'></i></td>"
+        . "<button class='btn btn-editar' style='background:none;'  data-cod='".$row['id_aluno']."'><i  class='la-2x la la-edit text-info'></i></button>"
+        . "<button class='btn btn-matricula' style='background:none;'  data-cod='".$row['id_aluno']."'><i class=\"la-2x la la-file-alt\"></i></button></td>"
                 . "</tr>";
     }
 }else{

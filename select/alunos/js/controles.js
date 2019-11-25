@@ -64,7 +64,47 @@ $(document).ready(function(){
            
 
         });
-        
+        $(document).on('input','#txt_cursos',function(){
+            var curso = $('#txt_cursos').val();
+            $.ajax({
+                dataType: 'HTML',
+                data:{curso:curso},
+                url:'../../insert/matricula/pesquisaTurma.php',
+                beforeSend(){
+                    
+                },
+                success(msg){
+                    $('#txt_periodo').html(msg);
+                }
+            });
+        });
+        $(document).on('click','.btn-matricula', function(){
+            const { value: formValues } =  Swal.fire({
+              title: 'Abrir Turma',
+              html:
+                '<label class="label-modal">Nº de Matricula</label><input placeholder="Nome da Turma" id="txt_nomeTurma" class="swal3-input"><br>' +                                     
+                '<label class="label-modal">Curso</label><select class="swal3-input" id="txt_cursos"><option value="">Selecione um curso</option></select><br>'+
+                '<label class="label-modal">Periodo</label><select class="swal3-input" id="txt_periodo"><option value="">Selecione o periodo</option></select><br>'+
+                '<div id="turmas"></div><br>',
+                
+
+              focusConfirm: false,
+              preConfirm: () => {
+
+                  var nome=document.getElementById('txt_nomeTurma').value;
+                  var inicio=document.getElementById('txt_periodoInicio').value;              
+                  var curso=document.getElementById('txt_cursos').value;
+
+                  matricular(nome,inicio,curso);
+              }
+            })
+
+            if (formValues) {
+              Swal.fire(JSON.stringify(formValues));
+
+            }
+            carregaSelect_cursos();
+        });
         
     
     });

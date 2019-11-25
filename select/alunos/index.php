@@ -103,6 +103,26 @@ $resposta2=" \n carregaTable(); "
         . "\n retorno2(msg.titulo,msg.mensagem,msg.status); ";
 $fn->ajax_buscar2($variaveis4, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
 
+$variaveis4=['aluno','matricula','curso','turma'];
+$resposta='resposta';
+$load="carregando";
+$page='../../insert/matricula/salvarMatricula.php';
+$namefunction='matricular';
+$tipoEnvio = 'JSON';
+$resposta2=" \n carregaTable(); "        
+        . "\n retorno2(msg.titulo,msg.mensagem,msg.status); ";
+$fn->ajax_buscar2($variaveis4, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
+
+
+$variaveis4=['curso'];
+$resposta='resposta';
+$load="carregando";
+$page='../../insert/matricula/salvarMatricula.php';
+$namefunction='matricular';
+$tipoEnvio = 'html';
+$resposta2=" ";
+        
+$fn->ajax_buscar2($variaveis4, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
 
 ?>
 

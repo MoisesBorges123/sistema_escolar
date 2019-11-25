@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="../../layouts/style_padrao/assets/css/ready.css">
 	<link rel="stylesheet" href="../../layouts/style_padrao/assets/css/demo.css">
         <link rel="stylesheet" href="../../layouts/style_padrao/assets/css/animate.css">
+        <link href="../../layouts/style_padrao/assets/1.3.0/css/line-awesome.css" rel="stylesheet" type="text/css"/>
         <?php
         if (isset($style)) {
             echo$style;
