@@ -67,6 +67,14 @@ $namefunction='carregaTable';
 $fn->ajax_buscar($variaveis1, $resposta, $load, $page, $namefunction);
 
 
+$variaveis1=['aluno'];
+$resposta='mytable';
+$load="carregando";
+$page='./carregaTable_matriculados.php';
+$namefunction='carregaTable';
+$fn->ajax_buscar($variaveis1, $resposta, $load, $page, $namefunction);
+
+
 
 ?>
 
