@@ -11,8 +11,11 @@ if(mysqli_affected_rows($link)>0){
         . "<td>".$row['sigla_curso']."</td>"
         . "<td>".$row['duracao']." periodos</td>"
         . "<td>".utf8_encode($row['nome'])."</td>"
-        . "<td><button style='background:none;' class='btn btn-remover' data-nome='".utf8_encode($row['nome_curso'])."' data-cod='".$row['id_curso']."'><i class='la-2x la la-trash text-danger'></i></button>&nbsp;&nbsp;"
-        . "<button class='btn btn-editar' style='background:none;'  data-cod='".$row['id_curso']."'><i  class='la-2x la la-edit text-info'></i></td>"
+        . "<td>"
+            . "<button style='background:none;' class='btn btn-remover' data-nome='".utf8_encode($row['nome_curso'])."' data-cod='".$row['id_curso']."'><i class='la-2x la la-trash text-danger'></i></button>&nbsp;&nbsp;"
+            . "<button class='btn btn-editar' style='background:none;'  data-cod='".$row['id_curso']."'><i  class='la-2x la la-edit text-info'></i></button>"
+            . "<a class='btn btn-detalhes' href='./detalhes.php?curso=".$row['id_curso']."'><i  class='la-2x la la-plus text-warning'></i></a>"
+        . "</td>"
                 . "</tr>";
     }
 }else{

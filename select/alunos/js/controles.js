@@ -79,10 +79,11 @@ $(document).ready(function(){
             });
         });
         $(document).on('click','.btn-matricula', function(){
+            var matricula = Math.trunc(gerarMatricula()); 
             const { value: formValues } =  Swal.fire({
               title: 'Abrir Turma',
               html:
-                '<label class="label-modal">Nº de Matricula</label><input placeholder="Nome da Turma" id="txt_nomeTurma" class="swal3-input"><br>' +                                     
+                '<label class="label-modal">Nº de Matricula</label><input disabled=true value='+matricula+' placeholder="Nome da Turma" id="txt_nomeTurma" class="swal3-input form-control"><br>' +                                     
                 '<label class="label-modal">Curso</label><select class="swal3-input" id="txt_cursos"><option value="">Selecione um curso</option></select><br>'+
                 '<label class="label-modal">Periodo</label><select class="swal3-input" id="txt_periodo"><option value="">Selecione o periodo</option></select><br>'+
                 '<div id="turmas"></div><br>',

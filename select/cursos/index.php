@@ -177,7 +177,10 @@ $fn->ajax_buscar2($variaveis4, $resposta, $resposta2, $load, $page, $namefunctio
            
 
         });
+        $(document).on('click','.btn-detalhes',function(){
+            
 
+        });
 
 
     });

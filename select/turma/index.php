@@ -61,7 +61,14 @@ $page='./carregaSelect_cursos.php';
 $namefunction='carregaSelect_cursos';
 $fn->ajax_buscar($variaveis1, $resposta, $load, $page, $namefunction);
 
-$variaveis3 = ['turma', 'inicio', 'curso'];
+$variaveis4=null;
+$resposta='txt_alunos';
+$load="carregando";
+$page='./carregaSelect_alunos.php';
+$namefunction='carregaSelect_alunos';
+$fn->ajax_buscar($variaveis4, $resposta, $load, $page, $namefunction);
+
+$variaveis3 = ['turma', 'inicio', 'curso','periodo','observacao'];
 $resposta = 'resposta';
 $resposta2 = "\n carregaTable();"
         . "\n resposta(msg['mensagem'].status,msg['mensagem'].mensagen,msg['mensagem'].icone,3000)";
@@ -80,6 +87,16 @@ $page = '../../update/turma/atualizar.php';
 $namefunction = 'editaTurma';
 $tipoEnvio = 'JSON';
 $fn->ajax_buscar2($variaveis6, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
+
+$variaveis7 = ['aluno','turma','matricula'];
+$resposta = 'x';
+$resposta2 = "\n Swal.close(); \n carregaTable();"
+        . "\n retorno2(msg.titulo,msg.mensagem,msg.status)";
+$load = "carregando";
+$page = '../../insert/matricula/matricular.php';
+$namefunction = 'matriculaAluno';
+$tipoEnvio = 'JSON';
+$fn->ajax_buscar2($variaveis7, $resposta, $resposta2, $load, $page, $namefunction, $tipoEnvio);
 
 $variaveis4 = ['id'];
 $resposta = 'x';

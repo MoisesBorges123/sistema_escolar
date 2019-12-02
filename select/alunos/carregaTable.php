@@ -2,7 +2,7 @@
 require_once '../../funcoes/php/myfuctions.php';
 $fn = new myfunctions;
 $link=$fn->conecta();
-echo$sql = "select * "
+$sql = "select * "
         . "from "
             . "aluno "
         . "where "
@@ -13,8 +13,7 @@ echo$sql = "select * "
 if(mysqli_affected_rows($link)>0){
     while($row= mysqli_fetch_assoc($result)){
         
-        echo"<tr>"
-        . "<td>".$row['matricula']."</td>"
+        echo"<tr>"        
         . "<td>".utf8_encode($row['nome_aluno'])."</td>"
         . "<td>".$row['telefone']."</td>"                
         . "<td class=\"text-center\"><button style='background:none;' class='btn btn-remover' data-nome='".utf8_encode($row['nome_aluno'])."' data-cod='".$row['id_aluno']."'><i class='la-2x la la-trash text-danger'></i></button>"
@@ -23,6 +22,7 @@ if(mysqli_affected_rows($link)>0){
                 . "</tr>";
     }
 }else{
+    
     echo"<tr><td colspan='5'>Não existe nenhum aluno cadastrado.</td></tr>";
   
 }

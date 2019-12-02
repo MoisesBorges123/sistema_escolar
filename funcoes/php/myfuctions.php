@@ -1616,7 +1616,7 @@ public function remover_caracter($string) {
         $servidor = 'localhost';
         $user = 'root';
         $senha = '';
-        $bd = 'escola';
+        $bd = 'escola2';
         //$user = 'u295342508_cated';
         //$senha = 'bemvindo007';
         //$bd = 'u295342508_cated';
